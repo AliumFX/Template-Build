@@ -8,5 +8,9 @@ var configuration = Argument("configuration", "Debug");
 Task("Default")
 .Does(() =>
 {
-    Console.WriteLine("Build complete.");
+    
 });
+
+// Execution
+
+RunTarget(target);

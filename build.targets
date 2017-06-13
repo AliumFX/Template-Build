@@ -2,7 +2,7 @@
     <Import Project="packages.props" />
     <Import Project="../project.props" Condition="Exists('../project.props')" />
 
-    <PropetyGroup>
+    <PropertyGroup>
         <RepositoryType>git</RepositoryType>
         <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
