@@ -7,9 +7,10 @@ var configuration = Argument("configuration", "Debug");
 
 var folders = new 
 {
+    build = "../build/",
     solution = "../",
     src = "../src/",
-    test = "../test/"
+    test = "../tests/"
 };
 
 Task("Restore")
@@ -30,10 +31,32 @@ Task("Build")
     });
 });
 
+// Test
+
+Task("Test")
+.IsDependentOn("Build")
+.Does(() =>
+{
+    var tests = GetFiles(folders.test + "**/*.csproj");
+    foreach (var test in tests)
+    {
+        string folder = System.IO.Path.GetDirectoryName(test.FullPath);
+        string project = folder.Substring(folder.LastIndexOf('\\') + 1);
+        string resultsFile = folders.build + "test-results/" + project + ".xml";
+
+        DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
+        {
+            ArgumentCustomization = args => args.Append("--xml " + resultsFile),
+            Configuration = configuration
+        });
+    }
+});
+
 // Default
 
 Task("Default")
-.IsDependentOn("Build");
+.IsDependentOn("Build")
+.IsDependentOn("Test");
 
 // Execution
 
