@@ -56,7 +56,8 @@ Task("Test")
 
 Task("Default")
 .IsDependentOn("Build")
-.IsDependentOn("Test");
+//.IsDependentOn("Test")
+;
 
 // Execution
 
