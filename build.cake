@@ -10,53 +10,103 @@ var folders = new
     build = "../build/",
     solution = "../",
     src = "../src/",
-    test = "../tests/"
+    tests = "../tests/"
 };
 
-Task("Restore")
-.Does(() =>
-{
-    DotNetCoreRestore(folders.solution);
-});
+// Clean
+Task("Clean")
+    .Description("Cleans the working and build output directories")
+    .Does(() =>
+    {
+        CleanDirectories(new DirectoryPath[] {
+            folders.build
+        });
+
+        CleanDirectories("../src/**/" + configuration);
+        CleanDirectories("../tests/**/" + configuration);
+        CleanDirectories("../samples/**/" + configuration);
+    });
+
+// Restore
+
+Task("Restore-NuGet")
+    .Description("Restores NuGet packages")
+    .Does(() =>
+    {
+        DotNetCoreRestore(folders.solution);
+    });
 
 // Build
 
 Task("Build")
-.IsDependentOn("Restore")
-.Does(() =>
-{
-    DotNetCoreBuild(folders.solution, new DotNetCoreBuildSettings
+    .Description("Builds all projects in the solution")
+    .IsDependentOn("Clean")
+    .IsDependentOn("Restore-NuGet")
+    .Does(() =>
     {
-        Configuration = configuration
+        DotNetCoreBuild(folders.solution, new DotNetCoreBuildSettings
+        {
+            Configuration = configuration
+        });
     });
-});
 
 // Test
 
 Task("Test")
-.IsDependentOn("Build")
-.Does(() =>
-{
-    var tests = GetFiles(folders.test + "**/*.csproj");
-    foreach (var test in tests)
+    .Description("Runs unit tests")
+    .IsDependentOn("Build")
+    .Does(() =>
     {
-        string folder = System.IO.Path.GetDirectoryName(test.FullPath);
-        string project = folder.Substring(folder.LastIndexOf('\\') + 1);
-        string resultsFile = folders.build + "test-results/" + project + ".xml";
-
-        DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
+        var tests = GetFiles(folders.tests + "**/*.csproj");
+        foreach (var test in tests)
         {
-            ArgumentCustomization = args => args.Append("--xml " + resultsFile),
-            Configuration = configuration
-        });
-    }
-});
+            string folder = System.IO.Path.GetDirectoryName(test.FullPath);
+            string project = folder.Substring(folder.LastIndexOf('\\') + 1);
+            string resultsFile = folders.build + "test-results/" + project + ".xml";
+
+            DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
+            {
+                ArgumentCustomization = args => args.Append("--xml " + resultsFile),
+                Configuration = configuration,
+                NoBuild = true
+            });
+        }
+    });
+
+Task("Publish")
+    .Description("Publishes the output of projects")
+    .IsDependentOn("Build")
+    .Does(() =>
+    {
+
+    });
+
+Task("Pack")
+    .Description("Packs the output of projects")
+    .IsDependentOn("Publish")
+    .Does(() =>
+    {
+        var projects = GetFiles(folders.src + "**/*.csproj");
+        foreach (var project in projects)
+        {
+            DotNetCorePack(project.FullPath, new DotNetCorePackSettings
+            {
+                ArgumentCustomization = args =>
+                {
+                    args.Append("--include-symbols");
+                    return args;
+                },
+                Configuration = configuration,
+                OutputDirectory = folders.build,
+                NoBuild = true
+            });
+        }
+    });
 
 // Default
 
 Task("Default")
-.IsDependentOn("Build")
-//.IsDependentOn("Test")
+.IsDependentOn("Pack")
 ;
 
 // Execution
