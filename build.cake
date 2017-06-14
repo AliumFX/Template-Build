@@ -73,17 +73,11 @@ Task("Test")
         }
     });
 
-Task("Publish")
-    .Description("Publishes the output of projects")
-    .IsDependentOn("Build")
-    .Does(() =>
-    {
-
-    });
+// Packaging
 
 Task("Pack")
     .Description("Packs the output of projects")
-    .IsDependentOn("Publish")
+    .IsDependentOn("Build")
     .Does(() =>
     {
         var projects = GetFiles(folders.src + "**/*.csproj");
