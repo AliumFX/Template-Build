@@ -59,20 +59,22 @@ Task("Test")
     .Does(() =>
     {
         var tests = GetFiles(folders.tests + "**/*.csproj");
-        foreach (var test in tests)
+        /*foreach (var test in tests)
         {
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
             string resultsFile = folders.testResults + project + ".xml";
+            string toolArguments = "xunit -xml ../" + resultsFile + " --no-build";
+            Console.WriteLine(toolArguments);
 
             CreateDirectory(folders.testResults);
 
-            /*DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
+            DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
             {
                 ArgumentCustomization = args => args.Append("-xml " + resultsFile),
                 Configuration = configuration,
                 NoBuild = true
-            });*/
+            });
             using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
                 {
                     Arguments = "xunit -xml ../" + resultsFile + " --no-build",
@@ -86,7 +88,7 @@ Task("Test")
                     AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.XUnit);
                 }
             }
-        }
+        }*/
     });
 
 // Packaging
