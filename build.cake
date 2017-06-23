@@ -10,7 +10,8 @@ var folders = new
     build = "../build/",
     solution = "../",
     src = "../src/",
-    tests = "../tests/"
+    tests = "../tests/",
+    testResults = "../build/test-results/"
 };
 
 // Clean
@@ -62,14 +63,29 @@ Task("Test")
         {
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
-            string resultsFile = folders.build + "test-results/" + project + ".xml";
+            string resultsFile = folders.testResults + project + ".xml";
 
-            DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
+            CreateDirectory(folders.testResults);
+
+            /*DotNetCoreTest(test.FullPath, new DotNetCoreTestSettings
             {
-                ArgumentCustomization = args => args.Append("--xml " + resultsFile),
+                ArgumentCustomization = args => args.Append("-xml " + resultsFile),
                 Configuration = configuration,
                 NoBuild = true
-            });
+            });*/
+            using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
+                {
+                    Arguments = "xunit -xml ../" + resultsFile + " --no-build",
+                    WorkingDirectory = folder
+                }))
+            {
+                process.WaitForExit();
+
+                if (AppVeyor.IsRunningOnAppVeyor)
+                {
+                    AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.XUnit);
+                }
+            }
         }
     });
 
@@ -77,7 +93,7 @@ Task("Test")
 
 Task("Pack")
     .Description("Packs the output of projects")
-    .IsDependentOn("Build")
+    .IsDependentOn("Test")
     .Does(() =>
     {
         var projects = GetFiles(folders.src + "**/*.csproj");
