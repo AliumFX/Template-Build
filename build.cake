@@ -64,7 +64,7 @@ Task("Test")
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
             string resultsFile = folders.testResults + project + ".xml";
-            string toolArguments = "xunit";// -xml ../" + resultsFile + " --no-build";
+            string toolArguments = "xunit -xml ../" + resultsFile + " --no-build -internaldiagnostics";
 
             CreateDirectory(folders.testResults);
             using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
