@@ -68,7 +68,7 @@ Task("Test")
             CreateDirectory(folders.testResults);
             using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
                 {
-                    Arguments = "xunit -xml ../" + resultsFile + " --no-build -internaldiagnostics",
+                    Arguments = "xunit -xml ../" + resultsFile + " -internaldiagnostics",
                     WorkingDirectory = folder
                 }))
             {
