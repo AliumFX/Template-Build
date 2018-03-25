@@ -1,13 +1,16 @@
 <Project>
     <Import Project="packages.props" />
     <Import Project="../project.props" Condition="Exists('../project.props')" />
-
     <PropertyGroup>
         <RepositoryType>git</RepositoryType>
         <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>true</SignAssembly>
         <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
         <VersionSuffix Condition="'$(VersionSuffix)'!='' AND '$(BuildNumber)' != ''">$(VersionSuffix)-$(BuildNumber)</VersionSuffix>
-        <Version Condition="'$(APPVEYOR)'=='True'">$(VersionPrefix)-$(APPVEYOR_REPO_BRANCH)-ci-$(APPVEYOR_BUILD_NUMBER_PADDED)</Version>
+        <VersionBranch Condition="'$(APPVEYOR)'=='True'">$([System.String]::Copy('$(APPVEYOR_REPO_BRANCH)').Replace('feature/','ft-'))</VersionBranch>
+        <VersionBranch Condition="'$(APPVEYOR)'=='True'">$([System.String]::Copy('$(VersionBranch)').Replace('hotfix/','hf-'))</VersionBranch>
+        <VersionBranch Condition="'$(APPVEYOR)'=='True'">$([System.String]::Copy('$(VersionBranch)').Replace('bugfix/','bf-'))</VersionBranch>
+        <VersionBranch Condition="'$(APPVEYOR)'=='True'">$([System.String]::Copy('$(VersionBranch)').Replace('/','-'))</VersionBranch>
+        <Version Condition="'$(APPVEYOR)'=='True'">$(VersionPrefix)-$(VersionBranch)-ci-$(APPVEYOR_BUILD_NUMBER_PADDED)</Version>
     </PropertyGroup>
 </Project>
