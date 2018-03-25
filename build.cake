@@ -1,7 +1,10 @@
+#tool "nuget:?package=GitVersion.CommandLine"
+
 // Arguments
 
 var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Debug");
+GitVersion version;
 
 // Configuration
 
@@ -28,6 +31,18 @@ Task("Clean")
         CleanDirectories("../samples/**/" + configuration);
     });
 
+// Version
+Task("Version")
+    .Description("Generates version information")
+    .Does(() => 
+    {
+        version = GitVersion(new GitVersionSettings
+        {
+            RepositoryPath = "../",
+            UpdateAssemblyInfo = false
+        });
+    });
+
 // Restore
 
 Task("Restore-NuGet")
@@ -42,12 +57,18 @@ Task("Restore-NuGet")
 Task("Build")
     .Description("Builds all projects in the solution")
     .IsDependentOn("Clean")
+    .IsDependentOn("Version")
     .IsDependentOn("Restore-NuGet")
     .Does(() =>
     {
         DotNetCoreBuild(folders.solution, new DotNetCoreBuildSettings
         {
-            Configuration = configuration
+            Configuration = configuration,
+            ArgumentCustomization = args =>
+            {
+                args.Append("/p:SemVer=" + version.NuGetVersion);
+                return args;
+            }
         });
     });
 
@@ -97,6 +118,7 @@ Task("Pack")
                 ArgumentCustomization = args =>
                 {
                     args.Append("--include-symbols");
+                    args.Append("/p:SemVer=" + version.NuGetVersion);
                     return args;
                 },
                 Configuration = configuration,

@@ -290,3 +290,4 @@ __pycache__/
 *.md5sum
 tools/Cake
 tools/nuget.exe
+tools/

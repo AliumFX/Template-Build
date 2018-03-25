@@ -1,13 +1,14 @@
 <Project>
     <PropertyGroup>
         <NETCorePartsVersion>2.0.0</NETCorePartsVersion>
+        <XUnitVersion>2.4.0-beta.1.build3958</XUnitVersion>
     </PropertyGroup>
     <!-- Unit Test Packages -->
     <ItemGroup Condition="'$(HostType)' == 'UnitTest'">
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.6.1" />
-        <PackageReference Include="xunit" Version="2.3.1" />
-        <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+        <PackageReference Include="xunit" Version="$(XUnitVersion)" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="$(XUnitVersion)" />
         <PackageReference Include="Moq" Version="4.7.63" />
-        <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+        <DotNetCliToolReference Include="dotnet-xunit" Version="$(XUnitVersion)" />
     </ItemGroup>
 </Project>
