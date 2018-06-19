@@ -11,4 +11,9 @@
         <PackageReference Include="Moq" Version="4.8.2" />
         <DotNetCliToolReference Include="dotnet-xunit" Version="$(XUnitVersion)" />
     </ItemGroup>
+
+  <PropertyGroup>
+    <AliumFrameworkVersion>0.2.0</AliumFrameworkVersion>
+    <AliumFrameworkPreRelease>-unstable*</AliumFrameworkPreRelease>
+  </PropertyGroup>
 </Project>
