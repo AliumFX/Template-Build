@@ -1,9 +1,10 @@
 <Project>
-    <Import Project="packages.props" />
-    <Import Project="../project.props" Condition="Exists('../project.props')" />
+    <Import Project="dependencies.props" />
+
     <PropertyGroup Label="Platform">
         <RuntimeFrameworkVersion Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">2.0.3</RuntimeFrameworkVersion>
     </PropertyGroup>
+    
     <PropertyGroup>
         <RepositoryType>git</RepositoryType>
         <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Key.snk</AssemblyOriginatorKeyFile>
