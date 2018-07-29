@@ -79,7 +79,7 @@ Task("Test")
             CreateDirectory(folders.testResults);
             using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
                 {
-                    Arguments = "test -r ../" + folders.testResults + " -l:trx;LogFilename=" + resultsFile + " --no-build",
+                    Arguments = "test -r ../" + folders.testResults + " -l:trx;LogFilename=" + resultsFile,
                     WorkingDirectory = folder
                 }))
             {
