@@ -43,22 +43,12 @@ Task("Version")
         });
     });
 
-// Restore
-
-Task("Restore-NuGet")
-    .Description("Restores NuGet packages")
-    .Does(() =>
-    {
-        DotNetCoreRestore(folders.solution);
-    });
-
 // Build
 
 Task("Build")
     .Description("Builds all projects in the solution")
     .IsDependentOn("Clean")
     .IsDependentOn("Version")
-    .IsDependentOn("Restore-NuGet")
     .Does(() =>
     {
         DotNetCoreBuild(folders.solution, new DotNetCoreBuildSettings
@@ -84,12 +74,12 @@ Task("Test")
         {
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
-            string resultsFile = folders.testResults + project + ".xml";
+            string resultsFile = project + ".xml";
 
             CreateDirectory(folders.testResults);
             using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
                 {
-                    Arguments = "xunit -xml ../" + resultsFile + " -internaldiagnostics",
+                    Arguments = "test -r ../" + folders.testResults + " -l:trx;LogFilename=" + resultsFile + " --no-build",
                     WorkingDirectory = folder
                 }))
             {
@@ -97,7 +87,7 @@ Task("Test")
 
                 if (AppVeyor.IsRunningOnAppVeyor)
                 {
-                    AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.XUnit);
+                    AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.MSTest);
                 }
             }
         }
