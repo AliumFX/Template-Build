@@ -75,7 +75,7 @@ Task("Test")
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
             string resultsFile = project + ".xml";
-            string fullResultsFile = System.IO.Path.Combine(folders.testPath, resultsFile);
+            string fullResultsFile = System.IO.Path.Combine(folders.testResults, resultsFile);
 
             CreateDirectory(folders.testResults);
             
