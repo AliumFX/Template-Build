@@ -75,6 +75,7 @@ Task("Test")
             string folder = System.IO.Path.GetDirectoryName(test.FullPath);
             string project = folder.Substring(folder.LastIndexOf('\\') + 1);
             string resultsFile = project + ".xml";
+            string fullResultsFile = System.IO.Path.Combine(folders.testPath, resultsFile);
 
             CreateDirectory(folders.testResults);
             
@@ -91,7 +92,7 @@ Task("Test")
 
             if (AppVeyor.IsRunningOnAppVeyor)
             {
-                AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.MSTest);
+                AppVeyor.UploadTestResults(fullResultsFile, AppVeyorTestResultsType.MSTest);
             }
         }
     });
