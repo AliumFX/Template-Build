@@ -80,7 +80,8 @@ Task("Test")
             
             var settings = new DotNetCoreTestSettings
             {
-                NoBuild = false,
+                Configuration = configuration,
+                NoBuild = true,
                 NoRestore = true,
                 ResultsDirectory = folders.testResults,
                 Logger = "trx;LogFilename=" + resultsFile
