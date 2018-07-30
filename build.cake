@@ -77,18 +77,20 @@ Task("Test")
             string resultsFile = project + ".xml";
 
             CreateDirectory(folders.testResults);
-            using (var process = StartAndReturnProcess("dotnet", new ProcessSettings 
-                {
-                    Arguments = "test -r ../" + folders.testResults + " -l:trx;LogFilename=" + resultsFile,
-                    WorkingDirectory = folder
-                }))
+            
+            var settings = new DotNetCoreTestSettings
             {
-                process.WaitForExit();
+                NoBuild = true,
+                NoRestore = true,
+                ResultsDirectory = folders.testResults,
+                Logger = "trx;LogFilename=" + resultsFile
+            };
+            
+            DotNetCoreTest(test.FullPath, settings);
 
-                if (AppVeyor.IsRunningOnAppVeyor)
-                {
-                    AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.MSTest);
-                }
+            if (AppVeyor.IsRunningOnAppVeyor)
+            {
+                AppVeyor.UploadTestResults(resultsFile, AppVeyorTestResultsType.MSTest);
             }
         }
     });
