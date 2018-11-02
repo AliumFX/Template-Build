@@ -14,6 +14,7 @@
         <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="$(NetCoreVersion)" />
         <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NetCoreVersion)" />
         <PackageReference Update="Microsoft.Extensions.DependencyModel" Version="$(NetCoreVersion)" />
+        <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreVersion)" />
     </ItemGroup>
 
     <ItemGroup Label="ASP.NET Core">
