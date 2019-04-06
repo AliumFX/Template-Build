@@ -2,7 +2,7 @@
     <PropertyGroup Label="Versions">
         <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview3.19153.1</NetCoreVersion>
         <AspNetCoreVersion Condition="'$(AspNetCoreVersion)'==''">2.1.0</AspNetCoreVersion>
-        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">2.1.0</EFCoreVersion>
+        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview3.19153.1</EFCoreVersion>
         <XUnitVersion Condition="'$(XUnitVersion)'==''">2.4.0</XUnitVersion>
     </PropertyGroup>
 
