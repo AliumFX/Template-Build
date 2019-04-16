@@ -1,40 +1,40 @@
 <Project>
-    <PropertyGroup Label="Versions">
-        <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview3.19153.1</NetCoreVersion>
-        <AspNetCoreVersion Condition="'$(AspNetCoreVersion)'==''">2.1.0</AspNetCoreVersion>
-        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview3.19153.1</EFCoreVersion>
-        <XUnitVersion Condition="'$(XUnitVersion)'==''">2.4.0</XUnitVersion>
-    </PropertyGroup>
+  <PropertyGroup Label="Versions">
+    <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview3.19153.1</NetCoreVersion>
+    <AspNetCoreVersion Condition="'$(AspNetCoreVersion)'==''">2.1.0</AspNetCoreVersion>
+    <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview3.19153.1</EFCoreVersion>
+    <XUnitVersion Condition="'$(XUnitVersion)'==''">2.4.0</XUnitVersion>
+  </PropertyGroup>
 
-    <ItemGroup Label=".NET Core">
-        <PackageReference Update="Microsoft.Extensions.Configuration" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.Configuration.Abstractions" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.Configuration.Json" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.DependencyModel" Version="3.0.0-preview3-27503-5" />
-        <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreVersion)" />
-    </ItemGroup>
+  <ItemGroup Label=".NET Core">
+    <PackageReference Update="Microsoft.Extensions.Configuration" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.Configuration.Abstractions" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.Configuration.Binder" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.Configuration.Json" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NetCoreVersion)" />
+    <PackageReference Update="Microsoft.Extensions.DependencyModel" Version="3.0.0-preview3-27503-5" />
+    <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreVersion)" />
+  </ItemGroup>
 
-    <ItemGroup Label="ASP.NET Core">
-        <PackageReference Update="Microsoft.AspNetCore.App" Version="$(AspNetCoreVersion)" />
-        <PackageReference Update="Microsoft.AspNetCore.Hosting" Version="$(AspNetCoreVersion)" />
-        <PackageReference Update="Microsoft.AspNetCore.Mvc.Abstractions" Version="$(AspNetCoreVersion)" />
-    </ItemGroup>
+  <ItemGroup Label="ASP.NET Core">
+    <PackageReference Update="Microsoft.AspNetCore.App" Version="$(AspNetCoreVersion)" />
+    <PackageReference Update="Microsoft.AspNetCore.Hosting" Version="$(AspNetCoreVersion)" />
+    <PackageReference Update="Microsoft.AspNetCore.Mvc.Abstractions" Version="$(AspNetCoreVersion)" />
+  </ItemGroup>
 
-    <ItemGroup Label="EF Core">
+  <ItemGroup Label="EF Core">
 
-    </ItemGroup>
+  </ItemGroup>
 
-    <ItemGroup Label="Testing">
-        <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-        <PackageReference Update="Moq" Version="4.9.0" />
-        <PackageReference Update="xunit" Version="$(XUnitVersion)" />
-        <PackageReference Update="xunit.runner.visualstudio" Version="$(XUnitVersion)" />
-    </ItemGroup>
+  <ItemGroup Label="Testing">
+    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="15.7.2" />
+    <PackageReference Update="Moq" Version="4.9.0" />
+    <PackageReference Update="xunit" Version="$(XUnitVersion)" />
+    <PackageReference Update="xunit.runner.visualstudio" Version="$(XUnitVersion)" />
+  </ItemGroup>
 
-    <ItemGroup Label="Other">
-
-    </ItemGroup>
+  <ItemGroup Label="Other">
+    <PackageReference Update="Newtonsoft.Json" Version="12.0.1" />
+  </ItemGroup>
 </Project>
