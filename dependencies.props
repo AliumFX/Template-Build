@@ -1,8 +1,8 @@
 <Project>
     <PropertyGroup Label="Versions">
-        <NetCoreVersion Condition="'$(NetCoreVersion)'==''">2.1.0</NetCoreVersion>
+        <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview3.19153.1</NetCoreVersion>
         <AspNetCoreVersion Condition="'$(AspNetCoreVersion)'==''">2.1.0</AspNetCoreVersion>
-        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">2.1.0</EFCoreVersion>
+        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview3.19153.1</EFCoreVersion>
         <XUnitVersion Condition="'$(XUnitVersion)'==''">2.4.0</XUnitVersion>
     </PropertyGroup>
 
@@ -13,7 +13,7 @@
         <PackageReference Update="Microsoft.Extensions.Configuration.Json" Version="$(NetCoreVersion)" />
         <PackageReference Update="Microsoft.Extensions.DependencyInjection" Version="$(NetCoreVersion)" />
         <PackageReference Update="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(NetCoreVersion)" />
-        <PackageReference Update="Microsoft.Extensions.DependencyModel" Version="$(NetCoreVersion)" />
+        <PackageReference Update="Microsoft.Extensions.DependencyModel" Version="3.0.0-preview3-27503-5" />
         <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreVersion)" />
     </ItemGroup>
 
