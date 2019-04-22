@@ -89,10 +89,13 @@ Task("Test")
             };
             
             DotNetCoreTest(test.FullPath, settings);
+        }
 
-            if (AppVeyor.IsRunningOnAppVeyor)
+        if (AppVeyor.IsRunningOnAppVeyor)
+        {
+            foreach (var result in GetFiles(folders.testResults + "**/*.xml")) 
             {
-                AppVeyor.UploadTestResults(fullResultsFile, AppVeyorTestResultsType.MSTest);
+                AppVeyor.UploadTestResults(result.FullPath, AppVeyorTestResultsType.MSTest);
             }
         }
     });

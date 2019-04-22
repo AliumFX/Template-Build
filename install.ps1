@@ -95,3 +95,6 @@ if ($Install) {
     # Update the PATH
     $env:PATH = "$env:DOTNET_INSTALL_DIR;$env:PATH"
 }
+
+Write-Host "##vso[task.setvariable variable=DOTNET_INSTALL_DIR;]${env:DOTNET_INSTALL_DIR};";
+Write-Host "##vso[task.setvariable variable=PATH;]${env:PATH};";
