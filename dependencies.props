@@ -1,8 +1,7 @@
 <Project>
     <PropertyGroup Label="Versions">
-        <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview4.19216.2</NetCoreVersion>
-        <AspNetCoreVersion Condition="'$(AspNetCoreVersion)'==''">2.1.0</AspNetCoreVersion>
-        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview3.19153.1</EFCoreVersion>
+        <NetCoreVersion Condition="'$(NetCoreVersion)'==''">3.0.0-preview5.19227.9</NetCoreVersion>
+        <EFCoreVersion Condition="'$(EFCoreVersion)'==''">3.0.0-preview5.19227.1</EFCoreVersion>
         <XUnitVersion Condition="'$(XUnitVersion)'==''">2.4.0</XUnitVersion>
     </PropertyGroup>
 
@@ -17,14 +16,9 @@
     <PackageReference Update="Microsoft.Extensions.Hosting" Version="$(NetCoreVersion)" />
   </ItemGroup>
 
-  <ItemGroup Label="ASP.NET Core">
-    <PackageReference Update="Microsoft.AspNetCore.App" Version="$(AspNetCoreVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Hosting" Version="$(AspNetCoreVersion)" />
-    <PackageReference Update="Microsoft.AspNetCore.Mvc.Abstractions" Version="$(AspNetCoreVersion)" />
-  </ItemGroup>
-
   <ItemGroup Label="EF Core">
-
+    <PackageReference Update="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
   </ItemGroup>
 
   <ItemGroup Label="Testing">
