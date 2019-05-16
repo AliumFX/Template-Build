@@ -19,6 +19,7 @@
   <ItemGroup Label="EF Core">
     <PackageReference Update="Microsoft.EntityFrameworkCore" Version="$(EFCoreVersion)" />
     <PackageReference Update="Microsoft.EntityFrameworkCore.InMemory" Version="$(EFCoreVersion)" />
+    <PackageReference Update="Microsoft.EntityFrameworkCore.SqlServer" Version="$(EFCoreVersion)" />
   </ItemGroup>
 
   <ItemGroup Label="Testing">
