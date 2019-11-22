@@ -3,6 +3,7 @@
         <NETCorePartsVersion>2.1.0</NETCorePartsVersion>
         <XUnitVersion>2.4.0-beta.1.build3958</XUnitVersion>
     </PropertyGroup>
+  
     <!-- Unit Test Packages -->
     <ItemGroup Condition="'$(HostType)' == 'UnitTest'">
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
