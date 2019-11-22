@@ -1,4 +1,4 @@
-#tool "nuget:?package=GitVersion.CommandLine"
+#tool "nuget:?package=GitVersion.CommandLine&version=5.1.2"
 
 // Arguments
 
@@ -10,11 +10,11 @@ GitVersion version;
 
 var folders = new 
 {
-    build = "../build/",
-    solution = "../",
-    src = "../src/",
-    tests = "../tests/",
-    testResults = "../build/test-results/"
+    artifacts = "./artifacts/",
+    solution = "./",
+    src = "./src/",
+    tests = "./tests/",
+    testResults = "./artifacts/test-results/"
 };
 
 // Clean
@@ -23,12 +23,12 @@ Task("Clean")
     .Does(() =>
     {
         CleanDirectories(new DirectoryPath[] {
-            folders.build
+            folders.artifacts
         });
 
-        CleanDirectories("../src/**/" + configuration);
-        CleanDirectories("../tests/**/" + configuration);
-        CleanDirectories("../samples/**/" + configuration);
+        CleanDirectories("./src/**/" + configuration);
+        CleanDirectories("./tests/**/" + configuration);
+        CleanDirectories("./samples/**/" + configuration);
     });
 
 // Version
@@ -38,7 +38,7 @@ Task("Version")
     {
         version = GitVersion(new GitVersionSettings
         {
-            RepositoryPath = "../",
+            RepositoryPath = "./",
             UpdateAssemblyInfo = false
         });
     });
