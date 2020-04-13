@@ -28,6 +28,7 @@
     <PackageReference Update="Moq" Version="4.9.0" />
     <PackageReference Update="xunit" Version="$(XUnitVersion)" />
     <PackageReference Update="xunit.runner.visualstudio" Version="$(XUnitVersion)" />
+    <PackageReference Update="coverlet.collector" Version="1.0.1" />
   </ItemGroup>
 
   <ItemGroup Label="Other">
