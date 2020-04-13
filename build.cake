@@ -110,6 +110,8 @@ Task("Pack")
     .IsDependentOn("Test")
     .Does(() =>
     {
+        CreateDirectory(folders.artifacts + "nupkg");
+
         var projects = GetFiles(folders.src + "**/*.csproj");
         foreach (var project in projects)
         {
@@ -122,7 +124,7 @@ Task("Pack")
                     return args;
                 },
                 Configuration = configuration,
-                OutputDirectory = folders.artifacts,
+                OutputDirectory = folders.artifacts + "nupkg",
                 NoBuild = true
             });
         }
