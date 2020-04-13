@@ -1,4 +1,8 @@
-#tool "nuget:?package=GitVersion.CommandLine&version=5.1.2"
+#tool nuget:?package=GitVersion.CommandLine&version=5.2.4
+
+// Environment
+
+Context.Environment.WorkingDirectory = MakeAbsolute(new DirectoryPath("../"));
 
 // Arguments
 
@@ -10,11 +14,11 @@ GitVersion version;
 
 var folders = new 
 {
-    artifacts = "../artifacts/",
-    solution = "../",
-    src = "../src/",
-    tests = "../tests/",
-    testResults = "../artifacts/test-results/"
+    artifacts = "./artifacts/",
+    solution = "./",
+    src = "./src/",
+    tests = "./tests/",
+    testResults = "./artifacts/test-results/"
 };
 
 // Clean
@@ -26,9 +30,9 @@ Task("Clean")
             folders.artifacts
         });
 
-        CleanDirectories("../src/**/" + configuration);
-        CleanDirectories("../tests/**/" + configuration);
-        CleanDirectories("../samples/**/" + configuration);
+        CleanDirectories("./src/**/" + configuration);
+        CleanDirectories("./tests/**/" + configuration);
+        CleanDirectories("./samples/**/" + configuration);
     });
 
 // Version
@@ -38,7 +42,6 @@ Task("Version")
     {
         version = GitVersion(new GitVersionSettings
         {
-            RepositoryPath = "../",
             UpdateAssemblyInfo = false
         });
     });
