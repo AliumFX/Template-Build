@@ -10,11 +10,11 @@ GitVersion version;
 
 var folders = new 
 {
-    artifacts = "./artifacts/",
-    solution = "./",
-    src = "./src/",
-    tests = "./tests/",
-    testResults = "./artifacts/test-results/"
+    artifacts = "../artifacts/",
+    solution = "../",
+    src = "../src/",
+    tests = "../tests/",
+    testResults = "../artifacts/test-results/"
 };
 
 // Clean
@@ -26,9 +26,9 @@ Task("Clean")
             folders.artifacts
         });
 
-        CleanDirectories("./src/**/" + configuration);
-        CleanDirectories("./tests/**/" + configuration);
-        CleanDirectories("./samples/**/" + configuration);
+        CleanDirectories("../src/**/" + configuration);
+        CleanDirectories("../tests/**/" + configuration);
+        CleanDirectories("../samples/**/" + configuration);
     });
 
 // Version
@@ -38,7 +38,7 @@ Task("Version")
     {
         version = GitVersion(new GitVersionSettings
         {
-            RepositoryPath = "./",
+            RepositoryPath = "../",
             UpdateAssemblyInfo = false
         });
     });
@@ -119,7 +119,7 @@ Task("Pack")
                     return args;
                 },
                 Configuration = configuration,
-                OutputDirectory = folders.build,
+                OutputDirectory = folders.artifacts,
                 NoBuild = true
             });
         }
